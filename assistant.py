@@ -1,7 +1,7 @@
-from handlers import add_contact,remove_phone,find_phone, change_contact, show_all,show_phone,delete_contact, add_birthday,show_birthday,birthdays
 
+import handlers
 from classes import AddressBook
-
+import data
 
 def parse_input(user_input):
     cmd, *args = user_input.split()
@@ -12,7 +12,7 @@ def parse_input(user_input):
 
 def main():
 
-    book = AddressBook()
+    book = data.load_data()
     print("Welcome to the assistant bot!")
     while True:
         user_input = input("Enter a command: ")
@@ -24,30 +24,31 @@ def main():
         elif command == "hello":
             print("How can I help you?")
         elif command == "add":
-            print(add_contact(args, book))
+            print(handlers.add_contact(args, book))
         elif command =='change':
-            print(change_contact(args,book))
+            print(handlers.change_contact(args,book))
         elif command == "phone":
-            print(show_phone(args,book))
+            print(handlers.show_phone(args,book))
         elif command == "find-phone":
-            print(find_phone(args,book))         
+            print(handlers.find_phone(args,book))         
         elif command == "all":
-            for result in show_all(book):
+            for result in handlers.show_all(book):
                 print(result)
         elif command == "remove":
-            print(remove_phone(args,book))           
+            print(handlers.remove_phone(args,book))           
         elif command == "add-birthday":
-            print(add_birthday(args,book))
+            print(handlers.add_birthday(args,book))
         elif command == "show-birthday":
-            print(show_birthday(args,book))
+            print(handlers.show_birthday(args,book))
         elif command == "delete":
-            print(delete_contact(args,book))
+            print(handlers.delete_contact(args,book))
         elif command == "birthdays":
-            for result in birthdays(book):
+            for result in handlers.birthdays(book):
                 print(result)                
 
         else:
             print("Invalid command.")
+    data.save_data(book)        
 
 if __name__ == "__main__":
     main()
