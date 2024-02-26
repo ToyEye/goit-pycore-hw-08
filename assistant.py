@@ -1,6 +1,6 @@
 
 import handlers
-from classes import AddressBook
+
 import data
 
 def parse_input(user_input):
